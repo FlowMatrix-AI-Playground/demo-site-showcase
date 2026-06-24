@@ -1,15 +1,86 @@
 ---
-// Placeholder index page -- will be replaced with the gallery grid
+import GalleryLayout from '../layouts/GalleryLayout.astro';
+import VariantCard from '../components/VariantCard.astro';
+import { variants, prospectName, prospectTagline } from '../data/variants';
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Demo Site Showcase</title>
-  </head>
-  <body>
-    <h1>Demo Site Showcase</h1>
-    <p>Gallery coming soon.</p>
-  </body>
-</html>
+<GalleryLayout>
+  <section class="hero">
+    <p class="hero-label">Design Gallery</p>
+    <h1 class="hero-title">{prospectName}</h1>
+    <p class="hero-tagline">{prospectTagline}</p>
+    <p class="hero-count">{variants.length} design {variants.length === 1 ? 'variant' : 'variants'} to explore</p>
+  </section>
+
+  <section class="grid-section">
+    <div class="grid">
+      {variants.map((v) => (
+        <VariantCard
+          slug={v.slug}
+          name={v.name}
+          tagline={v.tagline}
+          primaryColor={v.theme.primaryColor}
+          accentColor={v.theme.accentColor}
+          fontHeading={v.theme.fontHeading}
+          sections={v.sections}
+          previewUrl={v.previewUrl}
+        />
+      ))}
+    </div>
+  </section>
+</GalleryLayout>
+
+<style>
+  .hero {
+    text-align: center;
+    padding: 64px 24px 40px;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .hero-label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #71717a;
+    margin-bottom: 12px;
+  }
+
+  .hero-title {
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+
+  .hero-tagline {
+    font-size: 18px;
+    color: #a1a1aa;
+    margin-bottom: 8px;
+  }
+
+  .hero-count {
+    font-size: 14px;
+    color: #52525b;
+  }
+
+  .grid-section {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px 64px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 24px;
+  }
+
+  @media (max-width: 440px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
