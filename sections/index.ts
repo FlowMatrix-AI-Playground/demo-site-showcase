@@ -4,10 +4,12 @@
 
 import type { TemplateDefinition } from './types.js';
 
+// Templates 01-03
+import { minimalScroll } from './01-minimal-scroll/template.config.js';
+import { boldBrutalist } from './02-bold-brutalist/template.config.js';
+import { editorialMagazine } from './03-editorial-magazine/template.config.js';
+
 // TODO: Uncomment as templates are created
-// import { minimalScroll } from './01-minimal-scroll/template.config.js';
-// import { boldBrutalist } from './02-bold-brutalist/template.config.js';
-// import { elegantEditorial } from './03-elegant-editorial/template.config.js';
 // import { dynamicStartup } from './04-dynamic-startup/template.config.js';
 // import { warmOrganic } from './05-warm-organic/template.config.js';
 // import { techForward } from './06-tech-forward/template.config.js';
@@ -17,7 +19,9 @@ import type { TemplateDefinition } from './types.js';
 // import { playfulBold } from './10-playful-bold/template.config.js';
 
 export const templates: TemplateDefinition[] = [
-  // Templates will be added here as they are created
+  minimalScroll,
+  boldBrutalist,
+  editorialMagazine,
 ];
 
 export type {
