@@ -8,8 +8,8 @@
     "dev": "cd gallery && pnpm dev",
     "build": "node scripts/build-variants.js && cd gallery && pnpm build",
     "build:gallery": "cd gallery && pnpm build",
-    "validate": "node --loader tsx scripts/validate-configs.ts",
-    "scaffold": "node --loader tsx scripts/scaffold-demo.ts"
+    "validate": "node --import tsx scripts/validate-configs.ts",
+    "scaffold": "node --import tsx scripts/scaffold-demo.ts"
   },
   "devDependencies": {
     "tsx": "^4.19.0",
