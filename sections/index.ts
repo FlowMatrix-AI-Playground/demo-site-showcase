@@ -15,10 +15,10 @@ import { cinematicHero } from './05-cinematic-hero/template.config.js';
 import { splitPanelExplorer } from './06-split-panel-explorer/template.config.js';
 import { playfulIllustrated } from './07-playful-illustrated/template.config.js';
 
-// TODO: Uncomment as templates are created
-// import { ... } from './08-.../template.config.js';
-// import { ... } from './09-.../template.config.js';
-// import { ... } from './10-.../template.config.js';
+// Templates 08-10
+import { darkPremium } from './08-dark-premium/template.config.js';
+import { multiPageCorporate } from './09-multi-page-corporate/template.config.js';
+import { storytellingScroll } from './10-storytelling-scroll/template.config.js';
 
 export const templates: TemplateDefinition[] = [
   minimalScroll,
@@ -28,6 +28,9 @@ export const templates: TemplateDefinition[] = [
   cinematicHero,
   splitPanelExplorer,
   playfulIllustrated,
+  darkPremium,
+  multiPageCorporate,
+  storytellingScroll,
 ];
 
 export type {
