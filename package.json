@@ -6,7 +6,7 @@
   "description": "Template repo for prospect website demo showcases",
   "scripts": {
     "dev": "cd gallery && pnpm dev",
-    "build": "node scripts/build-variants.js && cd gallery && pnpm build",
+    "build": "node --import tsx scripts/build-variants.ts && cd gallery && pnpm build",
     "build:gallery": "cd gallery && pnpm build",
     "validate": "node --import tsx scripts/validate-configs.ts",
     "scaffold": "node --import tsx scripts/scaffold-demo.ts"
