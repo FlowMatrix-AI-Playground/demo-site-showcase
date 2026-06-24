@@ -1,0 +1,144 @@
+---
+import { variants } from '../data/variants';
+
+interface Props {
+  currentSlug: string;
+}
+
+const { currentSlug } = Astro.props;
+
+const currentIndex = variants.findIndex((v) => v.slug === currentSlug);
+const prevVariant = currentIndex > 0 ? variants[currentIndex - 1] : null;
+const nextVariant = currentIndex < variants.length - 1 ? variants[currentIndex + 1] : null;
+---
+
+<nav class="variant-nav">
+  <div class="nav-slot nav-prev">
+    {prevVariant && (
+      <a href={`/${prevVariant.slug}/`} class="nav-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m15 18-6-6 6-6" />
+        </svg>
+        <span class="nav-btn-text">
+          <span class="nav-btn-label">Previous</span>
+          <span class="nav-btn-name">{prevVariant.name}</span>
+        </span>
+      </a>
+    )}
+  </div>
+  <div class="nav-slot nav-center">
+    <a href="/" class="all-link">All Designs</a>
+  </div>
+  <div class="nav-slot nav-next">
+    {nextVariant && (
+      <a href={`/${nextVariant.slug}/`} class="nav-btn nav-btn-right">
+        <span class="nav-btn-text">
+          <span class="nav-btn-label">Next</span>
+          <span class="nav-btn-name">{nextVariant.name}</span>
+        </span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m9 18 6-6-6-6" />
+        </svg>
+      </a>
+    )}
+  </div>
+</nav>
+
+<style>
+  .variant-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px;
+    gap: 16px;
+  }
+
+  .nav-slot {
+    flex: 1;
+    display: flex;
+  }
+
+  .nav-prev {
+    justify-content: flex-start;
+  }
+
+  .nav-center {
+    justify-content: center;
+    flex: 0 0 auto;
+  }
+
+  .nav-next {
+    justify-content: flex-end;
+  }
+
+  .nav-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: #a1a1aa;
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.02);
+    transition: color 0.15s, border-color 0.15s, background 0.15s;
+  }
+
+  .nav-btn:hover {
+    color: #fafafa;
+    border-color: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .nav-btn-right {
+    text-align: right;
+  }
+
+  .nav-btn-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .nav-btn-label {
+    font-size: 11px;
+    color: #52525b;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 500;
+  }
+
+  .nav-btn-name {
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .all-link {
+    color: #a1a1aa;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 6px;
+    transition: color 0.15s, background 0.15s;
+  }
+
+  .all-link:hover {
+    color: #fafafa;
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  @media (max-width: 640px) {
+    .nav-btn-name {
+      display: none;
+    }
+    .nav-btn-label {
+      font-size: 13px;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+  }
+</style>

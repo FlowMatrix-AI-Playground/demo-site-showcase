@@ -1,0 +1,229 @@
+---
+interface Props {
+  slug: string;
+  name: string;
+  tagline: string;
+  primaryColor: string;
+  accentColor: string;
+  fontHeading: string;
+  sections: string[];
+  previewUrl: string;
+}
+
+const { slug, name, tagline, primaryColor, accentColor, fontHeading, sections, previewUrl } = Astro.props;
+---
+
+<a href={`/${slug}/`} class="card" style={`--accent: ${accentColor};`}>
+  <div class="browser-chrome">
+    <div class="dots">
+      <span class="dot dot-red"></span>
+      <span class="dot dot-yellow"></span>
+      <span class="dot dot-green"></span>
+    </div>
+    <div class="url-bar">{slug}.example.com</div>
+  </div>
+  <div class="preview-viewport">
+    <iframe
+      src={previewUrl}
+      title={`Preview of ${name}`}
+      loading="lazy"
+      tabindex="-1"
+      class="preview-iframe"
+    ></iframe>
+    <div class="preview-fade"></div>
+  </div>
+  <div class="card-body">
+    <div class="card-header">
+      <div class="color-swatch" style={`background: ${primaryColor};`}>
+        <span class="accent-dot" style={`background: ${accentColor};`}></span>
+      </div>
+      <div class="card-title-group">
+        <h3 class="card-name">{name}</h3>
+        <p class="card-tagline">{tagline}</p>
+      </div>
+    </div>
+    <p class="font-label">{fontHeading}</p>
+    <div class="section-tags">
+      {sections.map((s) => (
+        <span class="tag">{s}</span>
+      ))}
+    </div>
+    <div class="card-footer">
+      <span class="view-link">
+        View full design
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14" /><path d="m12 5 7 7-7 7" />
+        </svg>
+      </span>
+    </div>
+  </div>
+</a>
+
+<style>
+  .card {
+    display: block;
+    text-decoration: none;
+    color: #fafafa;
+    background: #18181b;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+  }
+
+  .card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  }
+
+  .browser-chrome {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: #0f0f12;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .dots {
+    display: flex;
+    gap: 5px;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  .dot-red { background: #ff5f57; }
+  .dot-yellow { background: #febc2e; }
+  .dot-green { background: #28c840; }
+
+  .url-bar {
+    flex: 1;
+    font-size: 11px;
+    color: #52525b;
+    background: rgba(255, 255, 255, 0.04);
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+  }
+
+  .preview-viewport {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    background: #ffffff;
+  }
+
+  .preview-iframe {
+    width: 1280px;
+    height: 900px;
+    border: none;
+    pointer-events: none;
+    transform: scale(0.32);
+    transform-origin: top left;
+  }
+
+  .preview-fade {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: linear-gradient(to bottom, transparent, #18181b);
+    pointer-events: none;
+  }
+
+  .card-body {
+    padding: 16px 18px 14px;
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+
+  .color-swatch {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .accent-dot {
+    position: absolute;
+    bottom: -3px;
+    right: -3px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid #18181b;
+  }
+
+  .card-title-group {
+    min-width: 0;
+  }
+
+  .card-name {
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+  }
+
+  .card-tagline {
+    font-size: 13px;
+    color: #71717a;
+    line-height: 1.3;
+  }
+
+  .font-label {
+    font-size: 12px;
+    color: #52525b;
+    margin-bottom: 10px;
+    font-style: italic;
+  }
+
+  .section-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 14px;
+  }
+
+  .tag {
+    font-size: 11px;
+    color: #a1a1aa;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 3px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  .card-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding-top: 12px;
+  }
+
+  .view-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent);
+    transition: gap 0.15s;
+  }
+
+  .card:hover .view-link {
+    gap: 10px;
+  }
+</style>

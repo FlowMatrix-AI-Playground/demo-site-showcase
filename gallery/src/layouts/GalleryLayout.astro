@@ -1,0 +1,125 @@
+---
+import { variants, prospectName } from '../data/variants';
+
+interface Props {
+  title?: string;
+}
+
+const { title } = Astro.props;
+const pageTitle = title ? `${title} -- ${prospectName}` : prospectName;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <nav class="top-nav">
+      <div class="nav-inner">
+        <a href="/" class="brand">{prospectName}</a>
+        <div class="nav-links">
+          <a href="/" class="nav-link">All Designs</a>
+          {variants.map((v) => (
+            <a href={`/${v.slug}/`} class="nav-link">{v.name}</a>
+          ))}
+        </div>
+      </div>
+    </nav>
+    <main class="main-content">
+      <slot />
+    </main>
+  </body>
+</html>
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: #09090b;
+    color: #fafafa;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    min-height: 100vh;
+  }
+
+  .top-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(9, 9, 11, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .nav-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .brand {
+    color: #fafafa;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 15px;
+    white-space: nowrap;
+    letter-spacing: -0.01em;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .nav-links::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-link {
+    color: #a1a1aa;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 6px;
+    white-space: nowrap;
+    transition: color 0.15s, background 0.15s;
+  }
+
+  .nav-link:hover {
+    color: #fafafa;
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .main-content {
+    padding-top: 56px;
+    min-height: 100vh;
+  }
+</style>
